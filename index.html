@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="dashboard">
+        <div class="hero">
+            <div class="header">
+                <h1>wid's dashboard</h1>
+                <h2 id="current-time">current time</h2>
+            </div>
+        </div>
+        <section class="links">
+            <div class="logo-container bookmark">
+                <div class="grouped-logo">
+                    <a href="https://www.youtube.com/" class="logo">
+                        <img src="https://www.freepnglogos.com/uploads/video-youtube-icon-27.png" alt="YouTube">
+                    </a>
+                    <a href="https://mail.google.com/" class="logo">
+                        <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Gmail">
+                    </a>
+                    <a href="#" class="logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Google_Drive_icon_%282020%29.svg/2295px-Google_Drive_icon_%282020%29.svg.png"
+                            alt="Google Drive">
+                    </a>
+                    <a href="#" class="logo">
+                        <img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-instagram-icon-png-image_6315974.png"
+                            alt="Instagram">
+                    </a>
+                    <a href="#" class="logo">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR77JyAcIBz2UoilLdS1PFif0BB1Od-eX6o97LydbhFGFQDOzv55w2oihBY2VEHw358qkw&usqp=CAU"
+                            alt="Six ITB">
+                    
+                    </a>
+                    <a href="#" class="logo">
+                        <img src="https://admin-edunex.itb.ac.id/assets/images/logo.png" alt="Edunex ITB">
+                    
+                    </a>
+                    <a href="#" class="logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png" alt="Classroom">
+                    
+                    </a>
+                    <a href="#" class="logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/800px-LinkedIn_logo_initials.png"
+                            alt="LinkedIn">
+                    
+                    </a>
+                    <a href="#" class="logo">
+                        <img src="https://cdn-images-1.medium.com/max/1200/1*A6kkoOVJVpXPWewg8axc5w.png" alt="Canva">
+                    
+                    </a>
+                    <a href="#" class="logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Diagrams.net_Logo.svg/2048px-Diagrams.net_Logo.svg.png"
+                            alt="Draw.io">
+                    
+                    </a>
+                    <a href="#" class="logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png"
+                            alt="ChatGPT">
+                    
+                    </a>
+                    <a href="#" class="logo">
+                        <img src="https://www.freepnglogos.com/uploads/logo-tokopedia-png/berita-tokopedia-info-berita-terbaru-tokopedia-6.png"
+                            alt="Tokopedia">
+                    
+                    </a>
+                </div>
+            </div>
+        </section>
+        <iframe src="https://calendar.google.com/calendar/embed?src=18220035%40std.stei.itb.ac.id&ctz=Asia%2FJakarta"
+            style="font-family: Arial, Helvetica, sans-serif; border: 0;" width="100%" height="100%" frameborder="0"
+            scrolling="no"></iframe>
+    </div>
+    <script>
+        function updateTime() {
+            const currentTimeElement = document.getElementById("current-time");
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, "0");
+            const minutes = now.getMinutes().toString().padStart(2, "0");
+            const seconds = now.getSeconds().toString().padStart(2, "0");
+            const currentTime = `${hours}:${minutes}:${seconds}`;
+            currentTimeElement.textContent = currentTime;
+        }
+
+        updateTime(); // Call the function once to set the initial time
+        setInterval(updateTime, 1000); // Update the time every second
+    </script>
+</body>
+
+</html>
