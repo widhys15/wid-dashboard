@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>wid's dashboard</title>
 </head>
 
 <body>
@@ -26,57 +26,83 @@
                     <a href="https://mail.google.com/" class="logo">
                         <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Gmail">
                     </a>
-                    <a href="#" class="logo">
+                    <a href="https://drive.google.com/drive/u/0/my-drive" class="logo">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Google_Drive_icon_%282020%29.svg/2295px-Google_Drive_icon_%282020%29.svg.png"
                             alt="Google Drive">
                     </a>
-                    <a href="#" class="logo">
+                    <a href="https://akademik.itb.ac.id/home?context=mahasiswa:18220035" class="logo">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR77JyAcIBz2UoilLdS1PFif0BB1Od-eX6o97LydbhFGFQDOzv55w2oihBY2VEHw358qkw&usqp=CAU"
+                        alt="Six ITB">
+                        
+                    </a>
+                    <a href="https://edunex.itb.ac.id" class="logo">
+                        <img src="https://admin-edunex.itb.ac.id/assets/images/logo.png" alt="Edunex ITB">
+                        
+                    </a>
+                    <a href="https://classroom.google.com" class="logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png" alt="Classroom">
+                        
+                    </a>
+                    <a href="https://www.linkedin.com" class="logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/800px-LinkedIn_logo_initials.png"
+                        alt="LinkedIn">
+                        
+                    </a>
+                    <a href="https://www.instagram.com" class="logo">
                         <img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-instagram-icon-png-image_6315974.png"
                             alt="Instagram">
                     </a>
-                    <a href="#" class="logo">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR77JyAcIBz2UoilLdS1PFif0BB1Od-eX6o97LydbhFGFQDOzv55w2oihBY2VEHw358qkw&usqp=CAU"
-                            alt="Six ITB">
-                    
-                    </a>
-                    <a href="#" class="logo">
-                        <img src="https://admin-edunex.itb.ac.id/assets/images/logo.png" alt="Edunex ITB">
-                    
-                    </a>
-                    <a href="#" class="logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png" alt="Classroom">
-                    
-                    </a>
-                    <a href="#" class="logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/800px-LinkedIn_logo_initials.png"
-                            alt="LinkedIn">
-                    
-                    </a>
-                    <a href="#" class="logo">
+                    <a href="https://www.canva.com" class="logo">
                         <img src="https://cdn-images-1.medium.com/max/1200/1*A6kkoOVJVpXPWewg8axc5w.png" alt="Canva">
                     
                     </a>
-                    <a href="#" class="logo">
+                    <a href="https://app.diagrams.net" class="logo">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Diagrams.net_Logo.svg/2048px-Diagrams.net_Logo.svg.png"
                             alt="Draw.io">
                     
                     </a>
-                    <a href="#" class="logo">
+                    <a href="https://chat.openai.com" class="logo">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png"
                             alt="ChatGPT">
-                    
                     </a>
-                    <a href="#" class="logo">
+                    <a href="https://www.tokopedia.com" class="logo">
                         <img src="https://www.freepnglogos.com/uploads/logo-tokopedia-png/berita-tokopedia-info-berita-terbaru-tokopedia-6.png"
                             alt="Tokopedia">
-                    
                     </a>
                 </div>
             </div>
         </section>
-        <iframe src="https://calendar.google.com/calendar/embed?src=18220035%40std.stei.itb.ac.id&ctz=Asia%2FJakarta"
-            style="font-family: Arial, Helvetica, sans-serif; border: 0;" width="100%" height="100%" frameborder="0"
-            scrolling="no"></iframe>
+        <section class="toggle-buttons">
+            <button onclick="toggleView('calendar')">Show Calendar</button>
+            <button onclick="toggleView('agenda')">Show Agenda</button>
+        </section>
+        <section id="calendar-section" class="calendars">
+            <div class="calendar-buttons">
+                <button onclick="changeCalendar('calendar-iframe1','https://calendar.google.com/calendar/embed?src=18220035%40std.stei.itb.ac.id&ctz=Asia%2FJakarta')">Class</button>
+                <button onclick="changeCalendar('calendar-iframe2','https://calendar.google.com/calendar/embed?src=c_95422486e01f4d97ebf8493590eb69807f905d1b8d3a122887d588cd605e9aa5%40group.calendar.google.com&ctz=Asia%2FJakarta')">Capstone TA</button>
+                <button onclick="changeCalendar('calendar-iframe3','https://calendar.google.com/calendar/embed?src=c_76fd820be9c0b0a13b576322102ec1dbd210164542a5e6f260e160259c86fdea%40group.calendar.google.com&ctz=Asia%2FJakarta')">Asisten IMK</button>
+                <button onclick="changeCalendar('calendar-iframe4','https://calendar.google.com/calendar/embed?src=c_c11fb0427e225d16b70b26899b0f72ce7067ad3c587197f20c438fa4daa21eb3%40group.calendar.google.com&ctz=Asia%2FJakarta')">Asisten AKE</button>
+                <button onclick="changeCalendar('calendar-iframe5','https://calendar.google.com/calendar/embed?src=c_b1c5f6eea8a059bd157453877a1051398e33fc6893fcb49a722afeae03cdc33c%40group.calendar.google.com&ctz=Asia%2FJakarta')">Intern</button>
+            </div>
+            <iframe id="calendar-iframe1" src="https://calendar.google.com/calendar/embed?src=18220035%40std.stei.itb.ac.id&ctz=Asia%2FJakarta"
+                style="font-family: Arial, Helvetica, sans-serif; border: 0; overflow: hidden;" width="100%" height="800" frameborder="0"
+                scrolling="no"></iframe>
+            <iframe id="calendar-iframe2" src="about:blank"
+                style="font-family: Arial, Helvetica, sans-serif; border: 0;" width="100%" height="0" frameborder="0"
+                scrolling="no"></iframe>
+            <iframe id="calendar-iframe3" src="about:blank"
+                style="font-family: Arial, Helvetica, sans-serif; border: 0;" width="100%" height="0" frameborder="0"
+                scrolling="no"></iframe>
+            <iframe id="calendar-iframe4" src="about:blank"
+                style="font-family: Arial, Helvetica, sans-serif; border: 0;" width="100%" height="0" frameborder="0"
+                scrolling="no"></iframe>
+            <iframe id="calendar-iframe5" src="about:blank"
+                style="font-family: Arial, Helvetica, sans-serif; border: 0;" width="100%" height="0" frameborder="0"
+                scrolling="no"></iframe>
+        </section>
+        <section id="agenda-section" class="agenda" style="display: none;">
+            <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FJakarta&showTitle=0&showNav=1&mode=AGENDA&showPrint=0&showCalendars=1&showTz=1&showTabs=0&src=MTgyMjAwMzVAc3RkLnN0ZWkuaXRiLmFjLmlk&src=Y19jMTFmYjA0MjdlMjI1ZDE2YjcwYjI2ODk5YjBmNzJjZTcwNjdhZDNjNTg3MTk3ZjIwYzQzOGZhNGRhYTIxZWIzQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&src=Y183NmZkODIwYmU5YzBiMGExM2I1NzYzMjIxMDJlYzFkYmQyMTAxNjQ1NDJhNWU2ZjI2MGUxNjAyNTljODZmZGVhQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&src=Y185NTQyMjQ4NmUwMWY0ZDk3ZWJmODQ5MzU5MGViNjk4MDdmOTA1ZDFiOGQzYTEyMjg4N2Q1ODhjZDYwNWU5YWE1QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&src=Y19iMWM1ZjZlZWE4YTA1OWJkMTU3NDUzODc3YTEwNTEzOThlMzNmYzY4OTNmY2I0OWE3MjJhZmVhZTAzY2RjMzNjQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%23EF6C00&color=%237CB342&color=%23D50000&color=%23B39DDB&color=%23A79B8E" style="border:solid 1px #777" width="100%" height="800" frameborder="0" scrolling="no"></iframe>
+        </section>
     </div>
     <script>
         function updateTime() {
@@ -87,6 +113,35 @@
             const seconds = now.getSeconds().toString().padStart(2, "0");
             const currentTime = `${hours}:${minutes}:${seconds}`;
             currentTimeElement.textContent = currentTime;
+        }
+        function toggleView(view) {
+            const calendarSection = document.getElementById("calendar-section");
+            const agendaSection = document.getElementById("agenda-section");
+
+            if (view === "calendar") {
+                calendarSection.style.display = "block";
+                agendaSection.style.display = "none";
+            } else if (view === "agenda") {
+                calendarSection.style.display = "none";
+                agendaSection.style.display = "block";
+            }
+        }
+        function changeCalendar(selectedIframeId, calendarUrl) {
+            const iframeIds = ["calendar-iframe1", "calendar-iframe2", "calendar-iframe3", "calendar-iframe4", "calendar-iframe5"];
+
+            // Hide all iframes and adjust the heights
+            for (const iframeId of iframeIds) {
+                const iframe = document.getElementById(iframeId);
+                iframe.style.display = "none"; // Hide all calendars
+                iframe.height = "0"; // Set the height to 0 to hide the iframe
+                iframe.src = "about:blank";
+            }
+
+            // Show the selected calendar and adjust its height
+            const selectedIframe = document.getElementById(selectedIframeId);
+            selectedIframe.style.display = "block"; // Show the selected calendar
+            selectedIframe.src = calendarUrl;
+            selectedIframe.height = "800"; // Set the height to a suitable value
         }
 
         updateTime(); // Call the function once to set the initial time
