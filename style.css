@@ -297,51 +297,112 @@ body {
 /* Responsive styles */
 @media (max-width: 768px) {
     .dashboard {
-        padding: 10px;
+        padding: 10px; /* Keep padding consistent */
     }
-    
+
+    /* Crypto Section Adjustments */
     .crypto-container {
-        flex-direction: column;
+        flex-direction: column; /* Stack cards vertically */
+        gap: 15px; /* Reduce gap between cards */
+        max-width: 100%; /* Allow container to use full width */
     }
-    
+
     .crypto-card {
-        width: 100%;
+        width: auto; /* Let card width adjust, remove fixed max/min */
+        max-width: none;
+        flex-basis: auto; /* Reset flex-basis */
+        margin: 0 10px; /* Add some horizontal margin */
+        padding: 15px; /* Slightly reduce padding on mobile */
     }
-    
+
+    .crypto-card img {
+        width: 50px; /* Slightly smaller image on mobile */
+        height: 50px;
+        margin-right: 10px;
+    }
+
+    .price {
+        font-size: 20px; /* Adjust price font size for mobile */
+    }
+
+    .change {
+        font-size: 14px; /* Adjust change font size for mobile */
+    }
+
+    /* Search Section Adjustments */
+    .search-section {
+        padding: 20px 15px; /* Adjust padding */
+    }
+
+    .search-input-container {
+        padding: 10px 15px; /* Adjust padding */
+    }
+
+    #search-input {
+        font-size: 16px; /* Keep search input font size reasonable */
+    }
+
+    /* News Section Adjustments */
     .news-wrapper {
-        flex-direction: column;
+        flex-direction: column; /* Stack news sections vertically */
+        gap: 15px; /* Reduce gap */
     }
-    
+
     .news-section {
-        width: 100%;
+        width: auto; /* Allow section to take full width */
+        min-width: unset; /* Remove min-width */
+        margin: 0 10px; /* Add horizontal margin */
+        padding: 15px; /* Adjust padding */
     }
-    
+
+    .news-section h2 {
+        font-size: 22px; /* Slightly smaller heading on mobile */
+        margin-bottom: 15px;
+    }
+
     .news-item {
-        flex-direction: column;
+        flex-direction: row; /* Keep image and text side-by-side */
+        align-items: flex-start; /* Align items to the top */
+        gap: 10px; /* Add gap between image and content */
     }
-    
+
     .news-item img {
-        width: 100%;
-        height: auto;
-        margin-right: 0;
-        margin-bottom: 10px;
+        width: 80px; /* Adjust image size */
+        height: 50px; /* Adjust image height */
+        margin-bottom: 0; /* Remove bottom margin */
+        margin-right: 10px; /* Ensure right margin */
+        flex-shrink: 0; /* Prevent image from shrinking */
     }
-    
-    /* Increase font sizes for mobile */
+
+    .news-content h3 {
+        font-size: 16px; /* Adjust headline size */
+        margin-bottom: 5px;
+    }
+
+    .news-content p {
+        font-size: 14px; /* Adjust paragraph size */
+        line-height: 1.4; /* Adjust line height */
+        margin-bottom: 5px;
+    }
+
+    .news-source {
+        font-size: 12px; /* Adjust source size */
+    }
+
+    /* Base font size adjustment for mobile */
     body {
-        font-size: 18px;
+        font-size: 16px; /* Slightly smaller base font for mobile */
     }
-    
+
+    /* Header font size adjustments (if needed, but you said header was ok) */
+    /*
     .header h1 {
         font-size: 28px;
     }
-    
+
     .header h2 {
         font-size: 24px;
     }
-    
-    #search-input {
-        font-size: 16px;
-    }
+    */
 }
 
