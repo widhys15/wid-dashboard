@@ -6,16 +6,19 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    # Add permissions for the GITHUB_TOKEN
+    permissions:
+      contents: write # Allow writing to the repository (needed for gh-pages branch)
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4 # Update checkout action to a newer version
 
       - name: Create config file
         run: |
           echo "const config = { nyTimesApiKey: '${{ secrets.NYTIMES_API_KEY }}' };" > config.js
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.4
+        uses: JamesIves/github-pages-deploy-action@v4.6.0 # Update deploy action version
         with:
-          branch: gh-pages
+          branch: main
           folder: .
