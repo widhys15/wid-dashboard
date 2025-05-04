@@ -1,24 +1,55 @@
-name: Build and Deploy
+name: Deploy to GitHub Pages
+
+# Run this workflow every time a change is pushed to the main branch
 on:
   push:
     branches:
       - main
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    # Add permissions for the GITHUB_TOKEN
-    permissions:
-      contents: write # Allow writing to the repository (needed for gh-pages branch)
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4 # Update checkout action to a newer version
 
-      - name: Create config file
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Build and deploy job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Or your preferred Node.js version
+
+      # This step creates the config.js file using the secret
+      - name: Create config file with API key
         run: |
           echo "const config = { nyTimesApiKey: '${{ secrets.NYTIMES_API_KEY }}' };" > config.js
+        env:
+          NYTIMES_API_KEY: ${{ secrets.NYTIMES_API_KEY }} # Make the secret available as an env var if needed elsewhere, though echo uses it directly
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.6.0 # Update deploy action version
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          branch: main
-          folder: .
+          # Upload entire repository content (including the generated config.js)
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
