@@ -8,9 +8,9 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: write
-  pages: write
-  id-token: write
+  contents: read # Read permission is sufficient for checkout and building artifact
+  pages: write    # Permission to deploy to Pages
+  id-token: write # Permission for OIDC token if needed by deployment steps
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
@@ -39,7 +39,7 @@ jobs:
         run: |
           echo "const config = { nyTimesApiKey: '${{ secrets.NYTIMES_API_KEY }}' };" > config.js
         env:
-          NYTIMES_API_KEY: ${{ secrets.NYTIMES_API_KEY }} # Make the secret available as an env var if needed elsewhere, though echo uses it directly
+          NYTIMES_API_KEY: ${{ secrets.NYTIMES_API_KEY }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

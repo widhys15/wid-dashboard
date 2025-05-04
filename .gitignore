@@ -1,2 +1,3 @@
 # Ignore config file with API keys
 config.js
+.env
