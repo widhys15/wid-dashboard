@@ -34,7 +34,7 @@ jobs:
         run: |
           echo "Injecting API Key..."
           # Use sed to replace the placeholder with the actual API key
-          sed -i "s|__NYTIMES_API_KEY__|${{ secrets.NYTIMES_API_KEY }}|g" script.js
+          sed -i "s|__NEWSAPI_KEY__|${{ secrets.NEWSAPI_KEY }}|g" script.js
           echo "API Key injected successfully."
 
       - name: Setup Pages

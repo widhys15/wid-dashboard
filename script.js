@@ -42,12 +42,12 @@ async function fetchCryptoPrices() {
     }
 }
 
-// Fetch NY Times business news
+// Fetch business news
 async function fetchBusinessNews() {
     try {
-        // Using NY Times Top Stories API for business news
-        const apiKey = '__NYTIMES_API_KEY__'; // Placeholder that will be replaced during deployment
-        const response = await fetch(`https://api.nytimes.com/svc/topstories/v2/business.json?api-key=${apiKey}`);
+        // Using News API for business news
+        const apiKey = '__NEWSAPI_KEY__'; // Placeholder that will be replaced during deployment
+        const response = await fetch(`https://newsapi.org/v2/top-headlines?category=business&language=en&apiKey=${apiKey}`);
         const data = await response.json();
         
         console.log("Business News API Response:", data); // Debug log
@@ -55,18 +55,14 @@ async function fetchBusinessNews() {
         const newsContainer = document.getElementById('business-news');
         newsContainer.innerHTML = '';
         
-        if (data.status === 'OK' && data.results && data.results.length > 0) {
+        if (data.status === 'ok' && data.articles && data.articles.length > 0) {
             // Display up to 5 news articles
-            const articles = data.results.slice(0, 5);
+            const articles = data.articles.slice(0, 5);
             articles.forEach(article => {
-                // Get the first image if available
+                // Get the image if available
                 let imageUrl = 'https://via.placeholder.com/120x75?text=No+Image'; // Updated placeholder size
-                if (article.multimedia && article.multimedia.length > 0) {
-                    // The multimedia array contains objects with url property
-                    const thumbnail = article.multimedia.find(media => media.format === 'thumbLarge') || article.multimedia[0];
-                    if (thumbnail && thumbnail.url) {
-                        imageUrl = thumbnail.url;
-                    }
+                if (article.urlToImage) {
+                    imageUrl = article.urlToImage;
                 }
                 
                 const newsItem = document.createElement('div');
@@ -76,8 +72,8 @@ async function fetchBusinessNews() {
                     <img src="${imageUrl}" alt="${article.title}">
                     <div class="news-content">
                         <h3><a href="${article.url}" target="_blank">${article.title}</a></h3>
-                        <p>${article.abstract || 'No description available'}</p>
-                        <span class="news-source">NY Times - ${new Date(article.published_date).toLocaleDateString()}</span>
+                        <p>${article.description || 'No description available'}</p>
+                        <span class="news-source">${article.source.name} - ${new Date(article.publishedAt).toLocaleDateString()}</span>
                     </div>
                 `;
                 
@@ -93,12 +89,12 @@ async function fetchBusinessNews() {
     }
 }
 
-// Fetch NY Times technology news
+// Fetch technology news
 async function fetchTechNews() {
     try {
-        // Using NY Times Top Stories API for technology news
-        const apiKey = '__NYTIMES_API_KEY__'; // Placeholder that will be replaced during deployment
-        const response = await fetch(`https://api.nytimes.com/svc/topstories/v2/technology.json?api-key=${apiKey}`);
+        // Using News API for technology news
+        const apiKey = '__NEWSAPI_KEY__'; // Placeholder that will be replaced during deployment
+        const response = await fetch(`https://newsapi.org/v2/top-headlines?category=technology&language=en&apiKey=${apiKey}`);
         const data = await response.json();
         
         console.log("Tech News API Response:", data); // Debug log
@@ -106,18 +102,14 @@ async function fetchTechNews() {
         const newsContainer = document.getElementById('tech-news');
         newsContainer.innerHTML = '';
         
-        if (data.status === 'OK' && data.results && data.results.length > 0) {
+        if (data.status === 'ok' && data.articles && data.articles.length > 0) {
             // Display up to 5 news articles
-            const articles = data.results.slice(0, 5);
+            const articles = data.articles.slice(0, 5);
             articles.forEach(article => {
-                // Get the first image if available
+                // Get the image if available
                 let imageUrl = 'https://via.placeholder.com/120x75?text=No+Image'; // Updated placeholder size
-                if (article.multimedia && article.multimedia.length > 0) {
-                    // The multimedia array contains objects with url property
-                    const thumbnail = article.multimedia.find(media => media.format === 'thumbLarge') || article.multimedia[0];
-                    if (thumbnail && thumbnail.url) {
-                        imageUrl = thumbnail.url;
-                    }
+                if (article.urlToImage) {
+                    imageUrl = article.urlToImage;
                 }
                 
                 const newsItem = document.createElement('div');
@@ -127,8 +119,8 @@ async function fetchTechNews() {
                     <img src="${imageUrl}" alt="${article.title}">
                     <div class="news-content">
                         <h3><a href="${article.url}" target="_blank">${article.title}</a></h3>
-                        <p>${article.abstract || 'No description available'}</p>
-                        <span class="news-source">NY Times - ${new Date(article.published_date).toLocaleDateString()}</span>
+                        <p>${article.description || 'No description available'}</p>
+                        <span class="news-source">${article.source.name} - ${new Date(article.publishedAt).toLocaleDateString()}</span>
                     </div>
                 `;
                 
