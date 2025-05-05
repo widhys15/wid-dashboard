@@ -6,7 +6,7 @@ on:
       - main # Or your default branch
 
 permissions:
-  contents: write # Needed for sed modification if not checked out read-only
+  contents: read # Changed to read, sed modifies in place, write needed for deploy-pages? Check docs. Let's try read first. If deploy fails, change back to write.
   pages: write    # Needed to deploy to GitHub Pages
   id-token: write # Needed for OIDC token
 
@@ -16,7 +16,6 @@ concurrency:
 
 jobs:
   deploy:
-    # This environment block is crucial for GitHub Pages deployment
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -54,17 +53,28 @@ jobs:
           fi
 
       - name: Inject API Key into script.js
+        # Grant write permission temporarily for sed -i
         run: |
+          chmod +w script.js
           echo "Injecting API Key..."
-          # Use sed to replace the placeholder with the actual API key
           sed -i "s|__GNEWS_API_KEY__|${{ secrets.GNEWS_API_KEY }}|g" script.js
-          echo "API Key injected successfully."
-          
-          # Verify the replacement was done (without showing the key)
+          echo "API Key injection attempt complete."
+        # Note: sed -i modifies the file in place
+
+      - name: Verify API Key Injection
+        run: |
+          echo "Verifying injection..."
           if grep -q "__GNEWS_API_KEY__" script.js; then
-            echo "ERROR: Placeholder still exists in script.js!"
+            echo "ERROR: Placeholder __GNEWS_API_KEY__ still found in script.js!"
+            # Optionally print a few lines around the placeholder for context
+            grep -C 3 "__GNEWS_API_KEY__" script.js
+            exit 1 # Fail the workflow if placeholder is found
           else
-            echo "Placeholder successfully replaced."
+            echo "Placeholder successfully replaced in script.js."
+            # Optionally show that the key is present (without revealing it)
+            echo "Checking for presence of 'apikey=' followed by non-placeholder chars:"
+            grep -o 'apikey=[^&]*' script.js | grep -v "__GNEWS_API_KEY__" || echo "Pattern indicating replaced key found."
+
           fi
 
       - name: Setup Pages
@@ -73,7 +83,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.' # Upload current directory
+          # Path is relative to the checkout directory
+          path: '.'
 
       - name: Deploy to GitHub Pages
         id: deployment
