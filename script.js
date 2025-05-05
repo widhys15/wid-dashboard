@@ -45,9 +45,9 @@ async function fetchCryptoPrices() {
 // Fetch business news
 async function fetchBusinessNews() {
     try {
-        // Using News API for business news
-        const apiKey = '__NEWSAPI_KEY__'; // Placeholder that will be replaced during deployment
-        const response = await fetch(`https://newsapi.org/v2/top-headlines?category=business&language=en&apiKey=${apiKey}`);
+        // Using GNews API for business news
+        const apiKey = '__GNEWS_API_KEY__'; // Placeholder for GitHub Actions
+        const response = await fetch(`https://gnews.io/api/v4/top-headlines?category=business&lang=en&apikey=${apiKey}`);
         const data = await response.json();
         
         console.log("Business News API Response:", data); // Debug log
@@ -55,14 +55,14 @@ async function fetchBusinessNews() {
         const newsContainer = document.getElementById('business-news');
         newsContainer.innerHTML = '';
         
-        if (data.status === 'ok' && data.articles && data.articles.length > 0) {
+        if (data.articles && data.articles.length > 0) {
             // Display up to 5 news articles
             const articles = data.articles.slice(0, 5);
             articles.forEach(article => {
                 // Get the image if available
-                let imageUrl = 'https://via.placeholder.com/120x75?text=No+Image'; // Updated placeholder size
-                if (article.urlToImage) {
-                    imageUrl = article.urlToImage;
+                let imageUrl = 'https://via.placeholder.com/120x75?text=No+Image';
+                if (article.image) {
+                    imageUrl = article.image;
                 }
                 
                 const newsItem = document.createElement('div');
@@ -92,9 +92,9 @@ async function fetchBusinessNews() {
 // Fetch technology news
 async function fetchTechNews() {
     try {
-        // Using News API for technology news
-        const apiKey = '__NEWSAPI_KEY__'; // Placeholder that will be replaced during deployment
-        const response = await fetch(`https://newsapi.org/v2/top-headlines?category=technology&language=en&apiKey=${apiKey}`);
+        // Using GNews API for technology news
+        const apiKey = '__GNEWS_API_KEY__'; // Placeholder for GitHub Actions
+        const response = await fetch(`https://gnews.io/api/v4/top-headlines?category=technology&lang=en&apikey=${apiKey}`);
         const data = await response.json();
         
         console.log("Tech News API Response:", data); // Debug log
@@ -102,14 +102,14 @@ async function fetchTechNews() {
         const newsContainer = document.getElementById('tech-news');
         newsContainer.innerHTML = '';
         
-        if (data.status === 'ok' && data.articles && data.articles.length > 0) {
+        if (data.articles && data.articles.length > 0) {
             // Display up to 5 news articles
             const articles = data.articles.slice(0, 5);
             articles.forEach(article => {
                 // Get the image if available
-                let imageUrl = 'https://via.placeholder.com/120x75?text=No+Image'; // Updated placeholder size
-                if (article.urlToImage) {
-                    imageUrl = article.urlToImage;
+                let imageUrl = 'https://via.placeholder.com/120x75?text=No+Image';
+                if (article.image) {
+                    imageUrl = article.image;
                 }
                 
                 const newsItem = document.createElement('div');
