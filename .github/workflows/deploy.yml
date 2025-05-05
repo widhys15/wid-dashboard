@@ -30,12 +30,42 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Debug API Key
+        run: |
+          echo "Checking API Key..."
+          # Print first and last 4 characters of the key for debugging
+          # This is safer than printing the entire key
+          if [ -z "${{ secrets.GNEWS_API_KEY }}" ]; then
+            echo "ERROR: GNEWS_API_KEY is empty or not set!"
+          else
+            KEY="${{ secrets.GNEWS_API_KEY }}"
+            KEY_LENGTH=${#KEY}
+            if [ $KEY_LENGTH -lt 8 ]; then
+              echo "WARNING: API key is too short (${KEY_LENGTH} chars)"
+              echo "Key starts with: ${KEY:0:2}..."
+            else
+              FIRST_FOUR="${KEY:0:4}"
+              LAST_FOUR="${KEY: -4}"
+              MASKED_LENGTH=$((KEY_LENGTH - 8))
+              MASKED=$(printf '%*s' "$MASKED_LENGTH" | tr ' ' '*')
+              echo "API Key (masked): ${FIRST_FOUR}${MASKED}${LAST_FOUR}"
+              echo "Key length: ${KEY_LENGTH} characters"
+            fi
+          fi
+
       - name: Inject API Key into script.js
         run: |
           echo "Injecting API Key..."
           # Use sed to replace the placeholder with the actual API key
           sed -i "s|__GNEWS_API_KEY__|${{ secrets.GNEWS_API_KEY }}|g" script.js
           echo "API Key injected successfully."
+          
+          # Verify the replacement was done (without showing the key)
+          if grep -q "__GNEWS_API_KEY__" script.js; then
+            echo "ERROR: Placeholder still exists in script.js!"
+          else
+            echo "Placeholder successfully replaced."
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
