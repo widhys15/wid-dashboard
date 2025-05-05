@@ -5,33 +5,48 @@ on:
     branches:
       - main # Or your default branch
 
+permissions:
+  contents: write # Needed for sed modification if not checked out read-only
+  pages: write    # Needed to deploy to GitHub Pages
+  id-token: write # Needed for OIDC token
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   deploy:
+    # This environment block is crucial for GitHub Pages deployment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # Needed to commit changes if necessary (e.g., for gh-pages branch)
-      pages: write    # Needed to deploy to GitHub Pages
-      id-token: write # Needed for OIDC token if using that for authentication
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js (if needed for build tools, otherwise optional)
+      - name: Set up Node.js (Optional, if needed for other tools)
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Or your preferred version
-
-      # Remove the step that creates config.js
-      # - name: Create config file
-      #   run: echo "const config = { nyTimesApiKey: '${{ secrets.NY_TIMES_API_KEY }}' };" > config.js
+          node-version: '20'
 
       - name: Inject API Key into script.js
         run: |
-          # Use sed to replace the placeholder with the actual API key
-          # The delimiter | is used to avoid issues if the key contains /
+          echo "Injecting API Key..."
+          # Ensure the secret is not empty before replacing
+          if [ -z "${{ secrets.NY_TIMES_API_KEY }}" ]; then
+            echo "::error::NY_TIMES_API_KEY secret is not set or empty!"
+            exit 1
+          fi
+          # Use sed to replace the placeholder
           sed -i "s|__NYT_API_KEY__|${{ secrets.NY_TIMES_API_KEY }}|g" script.js
-        # Ensure you have the NY_TIMES_API_KEY secret configured in your repository settings
+          echo "API Key injected."
+        env:
+          # Pass the secret to the environment for the run step
+          NY_TIMES_API_KEY: ${{ secrets.NY_TIMES_API_KEY }}
+
+      - name: List files after injection
+        run: ls -al
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -39,8 +54,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository by default, adjust if needed
-          path: '.'
+          path: '.' # Upload current directory
 
       - name: Deploy to GitHub Pages
         id: deployment
