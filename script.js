@@ -46,7 +46,7 @@ async function fetchCryptoPrices() {
 async function fetchBusinessNews() {
     try {
         // Using NY Times Top Stories API for business news
-        const apiKey = '__NYT_API_KEY__'; // Use placeholder
+        const apiKey = '__NYTIMES_API_KEY__'; // Placeholder that will be replaced during deployment
         const response = await fetch(`https://api.nytimes.com/svc/topstories/v2/business.json?api-key=${apiKey}`);
         const data = await response.json();
         
@@ -97,7 +97,7 @@ async function fetchBusinessNews() {
 async function fetchTechNews() {
     try {
         // Using NY Times Top Stories API for technology news
-        const apiKey = '__NYT_API_KEY__'; // Use placeholder
+        const apiKey = '__NYTIMES_API_KEY__'; // Placeholder that will be replaced during deployment
         const response = await fetch(`https://api.nytimes.com/svc/topstories/v2/technology.json?api-key=${apiKey}`);
         const data = await response.json();
         
