@@ -247,31 +247,87 @@ body {
     flex-grow: 1; /* Allow this container to grow and fill vertical space */
 }
 
+/* Individual news item styling */
 .news-item {
-    display: flex;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 15px;
+    display: flex; /* Use flexbox for layout */
+    align-items: flex-start; /* Align items to the top */
+    margin-bottom: 20px; /* Space between news items */
+    padding-bottom: 15px; /* Space before the border */
+    border-bottom: 1px solid #eee; /* Separator line */
+    gap: 15px; /* Space between image and content */
 }
 
+/* Last news item doesn't need a border bottom */
 .news-item:last-child {
     border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
+/* News item image styling */
 .news-item img {
-    width: 120px; /* Increased from 100px */
-    height: 75px; /* Increased from 60px */
-    object-fit: cover;
-    border-radius: 5px;
-    margin-right: 15px;
+    width: 120px; /* Fixed width for consistency */
+    height: 80px; /* Fixed height */
+    object-fit: cover; /* Crop image to fit without distortion */
+    flex-shrink: 0; /* Prevent image from shrinking */
+    border-radius: 4px; /* Slightly rounded corners */
 }
 
+/* News content container */
 .news-content {
-    flex: 1;
+    flex-grow: 1; /* Allow content to take remaining space */
 }
 
+/* News title styling */
 .news-content h3 {
-    margin: 0 0 8px 0; /* Increased bottom margin */
-    font-size: 18px; /* Increased from 16px */
+    margin-top: 0; /* Remove default top margin */
+    margin-bottom: 5px;
+    font-size: 1.1em; /* Slightly larger title */
+}
+
+.news-content h3 a {
+    text-decoration: none;
+    color: #333; /* Or your preferred link color */
+}
+
+.news-content h3 a:hover {
+    text-decoration: underline;
+}
+
+/* News description/abstract styling */
+.news-content p {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    color: #555;
+    line-height: 1.4;
+}
+
+/* News source and date styling */
+.news-source {
+    font-size: 0.8em;
+    color: #777;
+    display: block; /* Ensure it takes its own line if needed */
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 600px) {
+    .news-item {
+        flex-direction: column; /* Stack image and content vertically */
+        align-items: center; /* Center items */
+        text-align: center; /* Center text */
+    }
+
+    .news-item img {
+        width: 80%; /* Make image wider on mobile */
+        max-width: 200px; /* But not too wide */
+        height: auto; /* Adjust height automatically */
+        margin-bottom: 10px; /* Add space below image */
+    }
+
+    .news-content {
+        width: 100%; /* Ensure content takes full width */
+    }
 }
 
 .news-content h3 a {
