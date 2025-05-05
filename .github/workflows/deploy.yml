@@ -34,16 +34,16 @@ jobs:
         run: |
           echo "Injecting API Key..."
           # Ensure the secret is not empty before replacing
-          if [ -z "${{ secrets.NY_TIMES_API_KEY }}" ]; then
-            echo "::error::NY_TIMES_API_KEY secret is not set or empty!"
+          if [ -z "${{ secrets.NYTIMES_API_KEY }}" ]; then
+            echo "::error::NYTIMES_API_KEY secret is not set or empty!"
             exit 1
           fi
           # Use sed to replace the placeholder
-          sed -i "s|__NYT_API_KEY__|${{ secrets.NY_TIMES_API_KEY }}|g" script.js
+          sed -i "s|__NYT_API_KEY__|${{ secrets.NYTIMES_API_KEY }}|g" script.js
           echo "API Key injected."
         env:
           # Pass the secret to the environment for the run step
-          NY_TIMES_API_KEY: ${{ secrets.NY_TIMES_API_KEY }}
+          NY_TIMES_API_KEY: ${{ secrets.NYTIMES_API_KEY }}
 
       - name: List files after injection
         run: ls -al
