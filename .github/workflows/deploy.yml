@@ -36,10 +36,32 @@ jobs:
 
       # This step creates the config.js file using the secret
       - name: Create config file with API key
+        id: create_config # Added an ID
         run: |
+          echo "Creating config.js..."
+          # Ensure the secret is not empty before creating the file
+          if [ -z "${{ secrets.NYTIMES_API_KEY }}" ]; then
+            echo "::error::NYTIMES_API_KEY secret is not set or empty!"
+            exit 1
+          fi
           echo "const config = { nyTimesApiKey: '${{ secrets.NYTIMES_API_KEY }}' };" > config.js
+          echo "--- Verifying config.js content ---"
+          cat config.js
+          echo "--- End config.js content ---"
+          ls -l config.js # Verify file exists and has size
+          # Check if file exists and is not empty
+          if [ ! -s config.js ]; then
+            echo "::error::config.js is empty or was not created correctly!"
+            exit 1
+          fi
+          echo "config.js created successfully."
         env:
           NYTIMES_API_KEY: ${{ secrets.NYTIMES_API_KEY }}
+
+      - name: List files in checkout directory before setup
+        run: |
+          echo "Listing files in current directory:"
+          ls -al
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
