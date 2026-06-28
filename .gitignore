@@ -1,3 +1,7 @@
 # Ignore config file with API keys
 config.js
 .env
+
+# Claude Code local files (kept local, never pushed)
+.claude/
+CLAUDE.md

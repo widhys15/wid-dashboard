@@ -14,70 +14,36 @@
         <div class="hero">
             <div class="header">
                 <h1>wid's dashboard</h1>
-                <h2 id="current-time">current time</h2>
+                <div class="header-right">
+                    <div class="mini-pomodoro" title="Pomodoro focus timer">
+                        <span class="mini-phase" id="pomodoro-phase">Focus</span>
+                        <span class="mini-time" id="pomodoro-time">25:00</span>
+                        <button id="pomodoro-toggle">Start</button>
+                        <button id="pomodoro-reset">Reset</button>
+                    </div>
+                    <h2 id="current-time">current time</h2>
+                </div>
             </div>
         </div>
         <section class="links">
             <div class="logo-container bookmark">
-                <div class="grouped-logo">
-                    <a href="https://www.youtube.com/" class="logo">
-                        <img src="https://www.freepnglogos.com/uploads/video-youtube-icon-27.png" alt="YouTube">
-                    </a>
-                    <a href="https://mail.google.com/" class="logo">
-                        <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Gmail">
-                    </a>
-                    <a href="https://drive.google.com/drive/u/0/my-drive" class="logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Google_Drive_icon_%282020%29.svg/2295px-Google_Drive_icon_%282020%29.svg.png"
-                            alt="Google Drive">
-                    </a>
-                    <a href="https://twitter.com" class="logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/250px-X_logo.jpg" 
-                            alt="X (Twitter)">
-                    </a>
-                    <a href="https://classroom.google.com" class="logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png" alt="Classroom">
-                        
-                    </a>
-                    <a href="https://www.linkedin.com" class="logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/800px-LinkedIn_logo_initials.png"
-                        alt="LinkedIn">
-                        
-                    </a>
-                    <a href="https://www.instagram.com" class="logo">
-                        <img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-instagram-icon-png-image_6315974.png"
-                            alt="Instagram">
-                    </a>
-                    <a href="https://www.canva.com" class="logo">
-                        <img src="https://cdn-images-1.medium.com/max/1200/1*A6kkoOVJVpXPWewg8axc5w.png" alt="Canva">
-                    
-                    </a>
-                    <a href="https://app.diagrams.net" class="logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Diagrams.net_Logo.svg/2048px-Diagrams.net_Logo.svg.png"
-                            alt="Draw.io">
-                    
-                    </a>
-                    <a href="https://chat.openai.com" class="logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png"
-                            alt="ChatGPT">
-                    </a>
-                    <a href="https://chat.deepseek.com" class="logo">
-                        <img src="https://images.seeklogo.com/logo-png/61/2/deepseek-ai-icon-logo-png_seeklogo-611473.png" 
-                            alt="DeepSeek">
-                    </a>
-                    <a href="https://www.tokopedia.com" class="logo">
-                        <img src="https://www.freepnglogos.com/uploads/logo-tokopedia-png/berita-tokopedia-info-berita-terbaru-tokopedia-6.png"
-                            alt="Tokopedia">
+                <!-- Bookmarks are rendered by script.js (data-driven, editable). -->
+                <div class="grouped-logo" id="bookmark-grid">
+                    <a href="#" class="logo logo-add" id="add-bookmark" title="Add a bookmark">
+                        <span class="add-plus">+</span>
                     </a>
                 </div>
             </div>
         </section>
         
+        <!-- Crypto + Markets side by side -->
+        <div class="finance-row">
         <!-- Crypto Price Tracker -->
         <section class="crypto-tracker">
             <h2>Cryptocurrency Prices</h2>
             <div class="crypto-container">
                 <div class="crypto-card" id="bitcoin-card">
-                    <img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/45_Bitcoin_logo_logos-512.png" alt="Bitcoin">
+                    <img src="https://www.google.com/s2/favicons?domain=bitcoin.org&sz=128" alt="Bitcoin" loading="lazy">
                     <div class="crypto-info">
                         <h3>Bitcoin (BTC)</h3>
                         <p class="price">$<span id="btc-price">Loading...</span></p>
@@ -85,7 +51,7 @@
                     </div>
                 </div>
                 <div class="crypto-card" id="ethereum-card">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsKpP4Sd5a4t6knC4GpkiKgbbBdlij9t8mpg&s" alt="Ethereum">
+                    <img src="https://www.google.com/s2/favicons?domain=ethereum.org&sz=128" alt="Ethereum" loading="lazy">
                     <div class="crypto-info">
                         <h3>Ethereum (ETH)</h3>
                         <p class="price">$<span id="eth-price">Loading...</span></p>
@@ -94,6 +60,29 @@
                 </div>
             </div>
         </section>
+
+        <!-- Markets: IHSG + USD/IDR (below crypto) -->
+        <section class="markets-section">
+            <h2>Markets</h2>
+            <div class="markets-inner">
+                <div class="market-row">
+                    <span class="market-name">IHSG</span>
+                    <span class="market-values">
+                        <span class="market-price" id="ihsg-price">Loading...</span>
+                        <span class="change" id="ihsg-change"></span>
+                    </span>
+                </div>
+                <p class="market-asof" id="ihsg-asof"></p>
+                <div class="market-row">
+                    <span class="market-name">USD / IDR</span>
+                    <span class="market-values">
+                        <span class="market-price" id="usdidr-price">Loading...</span>
+                    </span>
+                </div>
+                <p class="market-asof" id="usdidr-asof"></p>
+            </div>
+        </section>
+        </div>
 
         <!-- Google-like Search Section -->
         <section class="search-section">
@@ -108,28 +97,27 @@
             </div>
         </section>
 
-        <!-- News Sections - Two Column Layout -->
-        <div class="news-wrapper">
-            <!-- NY Times Business News -->
-            <section class="news-section">
-                <h2>Business News</h2>
-                <div class="news-container" id="business-news">
-                    <p class="loading">Loading news...</p>
-                </div>
+        <!-- Below search: Market Pulse + Market News side by side -->
+        <div class="tools-wrapper">
+            <!-- Market Pulse: live snapshot from free sources -->
+            <section class="tool-section pulse-section">
+                <h2>Market Pulse</h2>
+                <ul class="pulse-list" id="pulse-list">
+                    <li class="pulse-loading">Loading market data&hellip;</li>
+                </ul>
+                <p class="pulse-asof" id="pulse-asof"></p>
             </section>
 
-            <!-- Technology News -->
-            <section class="news-section">
-                <h2>Technology News</h2>
-                <div class="news-container" id="tech-news">
-                    <p class="loading">Loading news...</p>
-                </div>
+            <!-- Market News: Indonesian + global finance headlines -->
+            <section class="tool-section news-section">
+                <h2>Market News</h2>
+                <ul class="news-list" id="news-list">
+                    <li class="news-loading">Loading headlines&hellip;</li>
+                </ul>
+                <p class="news-asof" id="news-asof"></p>
             </section>
         </div>
     </div>
-    
-    <!-- Remove config file include -->
-    <!-- <script src="config.js"></script> -->
 
     <!-- Include your JavaScript file -->
     <script src="script.js"></script>
